@@ -15,6 +15,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "API_KEY", "\"KoRB4K5LRHygfjCL2AH6iQ7NeUqDAGAB\""
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,6 +32,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    viewBinding {
+        enable = true
     }
 }
 
@@ -47,6 +55,8 @@ dependencies {
     //retrofit
     implementation libs.retrofit
     implementation libs.retrofit.rx.adapter
+    implementation libs.retrofit.rx.converter
+    implementation libs.logging.interceptor
 
     //glide
     implementation libs.glide
@@ -59,4 +69,8 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.kotlinx.coroutines.test
 }
