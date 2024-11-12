@@ -1,21 +1,21 @@
 package com.example.otchallenge
 
 import android.app.Application
-import com.example.otchallenge.di.AppComponent
-import com.example.otchallenge.di.AppModule
-import com.example.otchallenge.di.DaggerAppComponent
+
+import com.example.otchallenge.di.NetworkComponent
+import com.example.otchallenge.di.DaggerNetworkComponent
 import com.example.otchallenge.di.NetworkModule
 
 class MyApplication : Application() {
 
-	lateinit var appComponent: AppComponent
+	lateinit var networkComponent: NetworkComponent
 
 	override fun onCreate() {
 		super.onCreate()
-		appComponent = DaggerAppComponent
+
+		networkComponent = DaggerNetworkComponent
 			.builder()
-			.appModule(AppModule(this))
-			.networkModule(NetworkModule())
+			.networkModule(NetworkModule(this))
 			.build()
 	}
 }

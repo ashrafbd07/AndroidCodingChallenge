@@ -4,8 +4,11 @@ import android.app.Application
 import com.example.excercise.models.network.RemoteApi
 import com.example.otchallenge.utils.Constants
 import com.example.otchallenge.utils.NetworkChecker
+import com.example.otchallenge.views.ActivityScope
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,7 +18,17 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class NetworkModule() {
+class NetworkModule(private val application: Application) {
+
+    @Provides
+    @Singleton
+    fun provideApplication(): Application {
+        return application
+    }
+
+    @Provides
+    @Singleton
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
     @Singleton

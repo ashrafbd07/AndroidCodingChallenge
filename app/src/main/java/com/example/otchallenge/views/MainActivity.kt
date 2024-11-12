@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.otchallenge.MyApplication
 import com.example.otchallenge.R
 import com.example.otchallenge.databinding.ActivityBookListBinding
+import com.example.otchallenge.di.DaggerActivityComponent
 import com.example.otchallenge.model.data.Book
 import com.example.otchallenge.presenter.BookPresenter
 import javax.inject.Inject
@@ -25,7 +26,13 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		(application as MyApplication).appComponent.inject(this)
+		val networkComponent = (application as MyApplication).networkComponent
+
+		DaggerActivityComponent.builder()
+			.networkComponent(networkComponent)
+			.build()
+			.inject(this)
+
 		enableEdgeToEdge()
 		binding = ActivityBookListBinding.inflate(layoutInflater)
 		setContentView(binding.root)
