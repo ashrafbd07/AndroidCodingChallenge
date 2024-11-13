@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.excercise.models.network.RemoteApi
 import com.example.otchallenge.utils.Constants
 import com.example.otchallenge.utils.NetworkChecker
-import com.example.otchallenge.views.ActivityScope
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher

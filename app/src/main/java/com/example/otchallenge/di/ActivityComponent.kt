@@ -2,10 +2,15 @@ package com.example.otchallenge.di
 
 import com.example.otchallenge.views.ActivityScope
 import com.example.otchallenge.views.MainActivity
-import dagger.Component
+import dagger.Subcomponent
 
 @ActivityScope
-@Component(modules = [ActivityModule::class], dependencies = [AppComponent::class])
+@Subcomponent
 interface ActivityComponent {
 	fun inject(activity: MainActivity)
+
+	@Subcomponent.Factory
+	interface Factory {
+		fun create(): ActivityComponent
+	}
 }
