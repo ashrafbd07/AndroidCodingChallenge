@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NetworkModule::class])
-interface NetworkComponent {
+interface AppComponent {
     fun remoteApi(): RemoteApi
     fun networkChecker(): NetworkChecker
     fun provideIoDispatcher(): CoroutineDispatcher

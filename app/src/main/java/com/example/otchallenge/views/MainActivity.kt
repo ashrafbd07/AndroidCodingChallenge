@@ -26,12 +26,7 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		val networkComponent = (application as MyApplication).networkComponent
-
-		DaggerActivityComponent.builder()
-			.networkComponent(networkComponent)
-			.build()
-			.inject(this)
+		(application as MyApplication).createActivityComponent().inject(this)
 
 		enableEdgeToEdge()
 		binding = ActivityBookListBinding.inflate(layoutInflater)
