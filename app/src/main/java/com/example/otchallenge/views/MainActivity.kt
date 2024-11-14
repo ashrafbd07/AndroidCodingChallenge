@@ -18,6 +18,11 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 
 	private var adapter: BookListAdapter? = null
 	private lateinit var binding: ActivityBookListBinding
+	private var bookList: List<Book>? = null
+
+	companion object {
+		private const val KEY_BOOK_LIST = "book_list"
+	}
 
 	@Inject
 	lateinit var bookPresenter: BookPresenter
@@ -39,8 +44,23 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 			insets
 		}
 
+		if (savedInstanceState != null) {
+			bookList = savedInstanceState.getParcelableArrayList(KEY_BOOK_LIST)
+			// If bookList is not null, update UI directly
+			bookList?.let { showData(it) }
+		}
+
+
 		initAdapter()
-		bookPresenter.fetchBookList(this)
+
+		if (bookList == null) {
+			bookPresenter.fetchBookList(this)
+		}
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putParcelableArrayList(KEY_BOOK_LIST, ArrayList(bookList))
 	}
 
 	private fun initAdapter() {
