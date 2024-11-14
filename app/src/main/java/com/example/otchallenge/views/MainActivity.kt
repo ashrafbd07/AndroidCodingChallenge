@@ -1,6 +1,7 @@
 package com.example.otchallenge.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -40,7 +41,12 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 		}
 
 		initAdapter()
-		bookPresenter.fetchBookList(this)
+
+		bookPresenter.bookList?.let {
+			showData(it)
+		} ?: run {
+			bookPresenter.fetchBookList(this)
+		}
 	}
 
 	private fun initAdapter() {
