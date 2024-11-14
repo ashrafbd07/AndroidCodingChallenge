@@ -44,15 +44,13 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 			insets
 		}
 
+		initAdapter()
+
 		if (savedInstanceState != null) {
 			bookList = savedInstanceState.getParcelableArrayList(KEY_BOOK_LIST)
 			// If bookList is not null, update UI directly
 			bookList?.let { showData(it) }
 		}
-
-
-		initAdapter()
-
 		if (bookList == null) {
 			bookPresenter.fetchBookList(this)
 		}
@@ -81,6 +79,7 @@ class MainActivity : AppCompatActivity(), ViewHolderBook {
 	}
 
 	override fun showData(bookList: List<Book>) {
+		this.bookList = bookList
 		adapter?.setDataset(bookList)
 		binding.error.visibility = View.GONE
 		binding.progressBar.visibility = View.GONE
